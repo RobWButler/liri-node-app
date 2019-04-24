@@ -89,7 +89,16 @@ if (command === "spotify-this-song") {
   spotify
   .search({ type: 'track', query: work })
   .then(function(response) {
-    console.log(response);
+    var data = response.tracks.items[0];
+    var artists = [];
+    for (var key in data.artists){
+      artists.push(data.artists[key].name);
+    }
+    console.log("Artist(s): " + artists.join(", "));
+
+    console.log("Track: " + data.name);
+    console.log("Preview: " + data.preview_url);
+    console.log("Album: " + data.album.name)
   })
   .catch(function(err) {
     console.log(err);
