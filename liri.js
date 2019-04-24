@@ -16,11 +16,15 @@ if (command === "concert-this"){
     .get(queryUrl)
     .then(function(response) {
       var data = response.data
+      var band = work.toUpperCase().split("+").join(" ");
+      console.log(band + " UPCOMING CONCERTS")
+      console.log("=====================================")
       for (var key in data) {
-          console.log(data[key].venue.name)
-          
-          var time = moment(data[key].datetime).format("MM/DD/YYYY")
-          console.log(time)
+        var time = moment(data[key].datetime).format("MM/DD/YYYY")
+        var venue = data[key].venue.name
+        var location = data[key].venue.city + ", " + data[key].venue.country
+        console.log(venue + " " + time + " " + location)
+        console.log("=====================================")
         }
     })
     .catch(function(error) {
