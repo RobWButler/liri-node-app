@@ -1,20 +1,27 @@
 require("dotenv").config();
 var axios = require("axios")
+var moment = require('moment');
 
 var keys = require("./keys.js");
 
 
 var command = process.argv[2];
-var artist = process.argv.splice(3, process.argv.length - 1).join('+');
-console.log(artist)
+var work = process.argv.splice(3, process.argv.length - 1).join('+');
+console.log(work)
 
-if (command ==="concert-this"){
-    queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+if (command === "concert-this"){
+    queryUrl = "https://rest.bandsintown.com/artists/" + work + "/events?app_id=codingbootcamp"
 
     axios
     .get(queryUrl)
     .then(function(response) {
-        console.log(response.data);
+      var data = response.data
+      for (var key in data) {
+          console.log(data[key].venue.name)
+          
+          var time = moment(data[key].datetime).format("MM/DD/YYYY")
+          console.log(time)
+        }
     })
     .catch(function(error) {
         if (error.response) {
@@ -31,4 +38,4 @@ if (command ==="concert-this"){
         }
         console.log(error.config);
     })
-}
+};

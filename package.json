@@ -19,6 +19,7 @@
   "homepage": "https://github.com/RobWButler/liri-node-app#readme",
   "dependencies": {
     "axios": "^0.18.0",
-    "dotenv": "^7.0.0"
+    "dotenv": "^7.0.0",
+    "moment": "^2.24.0"
   }
 }
