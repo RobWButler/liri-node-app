@@ -3,6 +3,9 @@ var axios = require("axios")
 var moment = require('moment');
 
 var keys = require("./keys.js");
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
+
 
 
 var command = process.argv[2];
@@ -79,4 +82,16 @@ if (command === "movie-this"){
     }
     console.log(error.config);
 })
+}
+
+if (command === "spotify-this-song") {
+  
+  spotify
+  .search({ type: 'track', query: work })
+  .then(function(response) {
+    console.log(response);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 }
