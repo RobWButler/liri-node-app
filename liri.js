@@ -11,9 +11,27 @@ var spotify = new Spotify(keys.spotify);
 var command = process.argv[2];
 var work = process.argv.splice(3, process.argv.length - 1).join('+');
 
+switch(command){
+  case "concert-this":
+    concert()
+    break;
+
+  case "move-this":
+    movie()
+    break;
+
+  case "spotify-this-song":
+    music()
+    break;
+
+  case "do-what-it-says":
+    readfile();
+    break;
+
+}
+
 
 function concert(){
-  if (command === "concert-this"){
       queryUrl = "https://rest.bandsintown.com/artists/" + work + "/events?app_id=codingbootcamp"
 
       axios
@@ -46,11 +64,10 @@ function concert(){
           }
           console.log(error.config);
       })
-  };
+  
 }
 
 function movie(){
-  if (command === "movie-this"){
     var queryUrl = "http://www.omdbapi.com/?t=" + work + "&y=&plot=short&apikey=trilogy";
 
     axios
@@ -84,12 +101,11 @@ function movie(){
       }
       console.log(error.config);
   })
-  }
+  
 }
 
 function music(){
-  if (command === "spotify-this-song") {
-    
+
     spotify
     .search({ type: 'track', query: work })
     .then(function(response) {
@@ -107,11 +123,11 @@ function music(){
     .catch(function(err) {
       console.log(err);
     });
-  }
+  
 };
 
 function readfile(){
-  if (command === "do-what-it-says"){
+
     fs.readFile("random.txt", "utf8", function(error, data) {
 
       if (error) return console.log(error);
@@ -119,13 +135,10 @@ function readfile(){
       data = data.split(",");
       command = data[0];
       work = data[1];
-      concert();
-      movie();
-      music();
+
+      if (command === "concert-this"){concert();}
+      if (command === "movie-this"){movie();}
+      if (command === "spotify-this-song"){music();}
     });
-  }
+  
 }
-readfile();
-concert();
-movie();
-music();
