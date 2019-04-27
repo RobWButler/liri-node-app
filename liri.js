@@ -16,7 +16,7 @@ switch(command){
     concert()
     break;
 
-  case "move-this":
+  case "movie-this":
     movie()
     break;
 
