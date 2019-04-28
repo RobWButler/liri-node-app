@@ -68,6 +68,9 @@ function concert(){
 }
 
 function movie(){
+    if (!work) {
+      work = "Mr. Nobody"
+    }
     var queryUrl = "http://www.omdbapi.com/?t=" + work + "&y=&plot=short&apikey=trilogy";
 
     axios
